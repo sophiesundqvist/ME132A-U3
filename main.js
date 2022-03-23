@@ -1,39 +1,50 @@
 
-function filterByLastName (lastname){
-    let filterdStudents = []
-
-    for (let i = 0; i < DATABASE.students.length; i++){
-
-        if (DATABASE.students[i].lastName == lastname){
-            filterdStudents.push(DATABASE.students[i])
-        }
-    }
-
-    return filterdStudents
-}
 
 
 
-function getArrayOfSumOfPoint(){
-    let lastname = document.getElementById("search").value
-    let students = filterByLastName(lastname)
-    let sumOfPoints = []
+// function getArrayOfSumOfPoint(){
+//     let lastname = document.getElementById("search").value
+//     let students = filterByLastName(lastname)
+//     let sumOfPoints = []
 
-    for(let i = 0; i < students.length; i++){
-        let arrayCourses = students[i].courses
-        let sum = 0
+//     for(let i = 0; i < students.length; i++){
+//         let arrayCourses = students[i].courses
+//         let sum = 0
 
-            for(let i = 0; i < arrayCourses.length; i++){
-                let points = arrayCourses[0].passedCredits
+//             for(let i = 0; i < arrayCourses.length; i++){
+//                 let points = arrayCourses[0].passedCredits
 
-                sum = sum + points
-            }
+//                 sum = sum + points
+//             }
 
-        sumOfPoints.push(sum)
-    }
+//         sumOfPoints.push(sum)
+//     }
+
+//     return sumOfPoints
+// }
+
+
+// function getArraysOfCourseId (){
+//     let lastname = document.getElementById("search").value
+//     let students = filterByLastName(lastname)
+//     let arrayOfCoursId = []
     
-    return sumOfPoints
-}
+//     for(let i = 0; i < students.length; i++){
+//         let arrayCourses = students[i].courses
+//         let coursIds = [] 
+
+//             for(let i = 0; i < arrayCourses.length; i++){
+//                 let courseId = arrayCourses[0].courseId
+//                 coursIds.push(courseId)
+            
+//             }
+        
+//        arrayOfCoursId.push(coursIds)
+//     }
+
+//     return arrayOfCoursId
+// }
+
 
 
 // function getSumOfPointsBasedOnLastname (lastname){
@@ -60,31 +71,45 @@ function getArrayOfSumOfPoint(){
 
 
 
+function filterByLastName (lastname){
+    return DATABASE.students.filter(student =>{
+     return student.lastName.toLowerCase().includes(lastname)    
+    })
+}
 
-// create div with student
-function createDivWithStudent (name, lastname, credit){
+
+function createDivWithStudent (firstname, lastname){
     let div = document.createElement("div")
     div.classList.add("box")
-    document.getElementById("result").appendChild(div)
 
-    div.innerHTML = 
-    `<h3> ${name} ${lastname} (total: (${credit}credits)</h3>
-    <h4> Courses </h4>
-    <div class = "courses-result"></div>`
+    div.innerHTML = `
+        <h3> ${firstname} ${lastname}</h3>
+        <h4> Courses </h4>
+        <div class ="course-result> </div> `
+    
+    let divWithResult = document.getElementById("result")
+    divWithResult.appendChild(div)
 }
 
 
-// creates div based on array of filterd students
-function setFilterdstudent(){
+
+function setFilterStudent (){
     let lastname = document.getElementById("search").value
     let students = filterByLastName(lastname)
-    let points = getArrayOfSumOfPoint()
 
-    for(let i = 0; i < students.length; i++){
-        createDivWithStudent(students[i].firstName, students[i].lastName, points[i]  )
-    }
+    let result = document.getElementById("result")
+    result.innerHTML = ""
+    students.forEach(student => {
+        return createDivWithStudent(student.firstName, student.lastName)
+    })
 }
 
-setFilterdstudent()
+
+function serEventListener (){
+    let form = document.getElementById("search-box")
 
 
+    form.addEventListener("keyup", setFilterStudent)
+}
+
+serEventListener()
