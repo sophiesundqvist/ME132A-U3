@@ -1,69 +1,99 @@
-function filterByLastName (lastname){
+function filterByLastName(lastname){
     return DATABASE.students.filter(student =>{
-     return student.lastName.toLowerCase().includes(lastname)    
+        return student.lastName.toLowerCase().includes(lastname)
     })
 }
 
 
-function createDivWithStudent (firstname, lastname, credits, courses ){
-    let div = document.createElement("div")
-    div.classList.add("box")
 
-    div.innerHTML = `
-        <h3> ${firstname} ${lastname}  ( credtis ${credits} )</h3>
-        <h4> Courses </h4>
-        <div class= courses-result> ${courses}</div>`
+function cretaDiv (firstname, lastname, credits){
 
-    let result = document.getElementById("result")
-    result.appendChild(div)
+        let studentDiv = document.createElement("div")
+        studentDiv.classList.add("box")
+        studentDiv.innerHTML = `
+        <h3>${firstname} ${lastname} (Credits ${credits})</h3>
+        <h4>Coruses</h4>`
+
+    return studentDiv
 }
 
 
+// får ut totala antal poäng från  varje studentsCourses, måste kallas i en loop som går igenom varje student för att denna baseras på DATABASE.students[i].courses
+function getTotalCredits(courses){
+
+    let studentTotalCredits = 0
+
+        courses.forEach(course =>{
+            studentTotalCredits = studentTotalCredits + course.passedCredits
+        })
+
+    return studentTotalCredits
+
+}
 
 
-
-function setFilterdStudent (){
+function setHTML (){
     let lastname = document.getElementById("search").value
     let students = filterByLastName(lastname)
+    let wrapper = document.getElementById("result")
 
-    let result = document.getElementById("result")
-    // empty result of divs before every keyup
-    result.innerHTML = ""
+    wrapper.innerHTML = ""
+    for (let student of students){
 
-    
-    for(let student of students){
-        
-        let  studentTotalCredits = 0
-        
-        studentCourses = getCoursesById(student.courses)
-        
-        let hej = studentCourses.map(course =>{
-            return course.title + course.totalCredits + course.courseId
-        })
+        let totalCredit = getTotalCredits(student.courses)
+        let studentDiv = cretaDiv(student.firstName, student.lastName, totalCredit)
+        wrapper.appendChild(studentDiv)
 
-        // for each student the total passed credit is counted
-        credits = student.courses.forEach(course => {
-            studentTotalCredits += course.passedCredits
-        })
-        createDivWithStudent(student.firstName, student.lastName, studentTotalCredits, hej)
+
+        let divWithCourses = creatCourseDivs(student.courses)
+        studentDiv.appendChild(divWithCourses)
+
+
     }
+
 }
-
-
 
 
 
 function setEventListener (){
     let form = document.getElementById("search-box")
-
-
-    form.addEventListener("keyup", setFilterdStudent)
+    form.addEventListener("keyup", setHTML)
 }
 
 setEventListener()
 
 
 
+// skapar en div som  tillsammans innerhåller paragrafer med alla courses 
+// behöver blir kallad students[i].courses
+function creatCourseDivs(courses){
+    let courseContainer = document.createElement("div")
+    courseContainer.classList.add("course-result")
+    
+   
+    for (let course of courses){
+
+        let courseTitle = getCourseTitle(course)
+        let courseTotalCredit = getCourseTotalCredit(course)
+
+        let courseDiv = document.createElement("div")
+        courseDiv.innerHTML = `
+        <p> ${courseTitle} </p>
+        <p> ${course.started.semester} ${course.started.year} (${course.passedCredits} of ${courseTotalCredit} credits)`
+
+        courseContainer.appendChild(courseDiv)
+
+        changeBackgroundColorPassedCredit(courseDiv, courseTotalCredit, course.passedCredits)
+
+    }
+
+    return courseContainer
+}
+
+
+// går igenom kursena baserat på paramatern och mappar om beroende på =>
+// går vidare och med hjälp av find så hittar den en kurs 
+// går vidare och retunera den kurs som har har det kursid som stämmer överens med studentens kurs id  
 function getCoursesById (courses){
     return courses.map(studentCourse =>{
         return DATABASE.courses.find(course =>{
@@ -73,37 +103,31 @@ function getCoursesById (courses){
 }
 
 
-function createDivWithCourseInfo(title, startdate, passedcredits, totalcredits){
+function getCourseTitle (course){
 
-    let div = document.createElement("div")
-    div.innerHTML = `
-    <p> ${title}</p>
-    <p> ${startdate} ( ${passedcredits} / ${totalcredits}</p>
-    `
+    for (let databasecourse of DATABASE.courses){
+        if (course.courseId == databasecourse.courseId){
+            return databasecourse.title
+        }
+    }
+    
 }
 
 
-// function setDivWithCourseInfo (lastname){
-//     let students = filterByLastName(lastname)
+function getCourseTotalCredit (course){
 
-//     for (let student of students){
-//         studentCourses = getCoursesById(student.courses)
-//         console.log(studentCourses)
-
-//         let hej = studentCourses.map(course =>{
-//             return course.title
-//         })
-
-//         hej.forEach(cours =>{
-//             createDivWithCourseInfo(cours, cours , cours, cours)
-//         })
-
-//         console.log(hej)
-
+    for (let databasecourse of DATABASE.courses){
+        if (course.courseId == databasecourse.courseId){
+            return databasecourse.totalCredits
+        }
+    }
     
-//     }
-// }
+}
 
+function changeBackgroundColorPassedCredit (course, courseTotalCredit, studentPassedCredit){
 
+    if (courseTotalCredit == studentPassedCredit){
+        course.classList.add("passed")
+    }
 
-
+}
