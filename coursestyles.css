@@ -1,0 +1,52 @@
+body{
+    margin: 20px;
+    height: 100vh;
+    background-color: rgb(217, 212, 207);
+}
+
+#search-box{
+    display: flex;
+}
+
+#search-box > p{
+    margin: 0;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+
+.box{
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.box > h4{
+    margin-bottom: 6px;
+}
+
+.course-result{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 5px;
+}
+
+.student-result > div{
+    padding-left: 10px;
+    border-radius: 10px;
+    background-color: rgb(179, 198, 219);;
+    border: 0.5px solid black;
+    font-size: 10pt;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+.student-result > .passed{
+    background-color: rgb(161, 243, 161);
+}
+
+
+.student-result > div > p{
+    margin: 0;
+}
