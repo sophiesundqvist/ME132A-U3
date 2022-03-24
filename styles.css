@@ -26,22 +26,31 @@ body{
     margin-bottom: 6px;
 }
 
-.courses-result{
-    display: flex;
+
+.course-result{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 5px;
 }
 
-.courses-result > div{
+.course-result > div{
     padding-left: 10px;
-    padding-right: 10px;
-    margin-right: 15px;
     border-radius: 10px;
-    background-color: rgb(204, 210, 217);;
+    background-color: rgb(179, 198, 219);;
     border: 0.5px solid black;
+    font-size: 10pt;
+    padding-bottom: 8px;
+    padding-top: 8px;
 }
 
-.courses-result > div > p{
-    margin-top: 4px;
-    margin-bottom: 4px;
-    font-size: 11pt;
+.course-result > .passed{
+    background-color: rgb(161, 243, 161);
 }
+
+
+.course-result > div > p{
+    margin: 0;
+}
+
+
 

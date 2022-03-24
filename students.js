@@ -5,18 +5,21 @@ function filterByLastName (lastname){
 }
 
 
-function createDivWithStudent (firstname, lastname, credits){
+function createDivWithStudent (firstname, lastname, credits, courses ){
     let div = document.createElement("div")
     div.classList.add("box")
 
     div.innerHTML = `
         <h3> ${firstname} ${lastname}  ( credtis ${credits} )</h3>
         <h4> Courses </h4>
-        <div class ="course-result> </div> `
-    
-    let divWithResult = document.getElementById("result")
-    divWithResult.appendChild(div)
+        <div class= courses-result> ${courses}</div>`
+
+    let result = document.getElementById("result")
+    result.appendChild(div)
 }
+
+
+
 
 
 function setFilterdStudent (){
@@ -26,19 +29,28 @@ function setFilterdStudent (){
     let result = document.getElementById("result")
     // empty result of divs before every keyup
     result.innerHTML = ""
-     
+
+    
     for(let student of students){
+        
         let  studentTotalCredits = 0
+        
+        studentCourses = getCoursesById(student.courses)
+        
+        let hej = studentCourses.map(course =>{
+            return course.title + course.totalCredits + course.courseId
+        })
 
         // for each student the total passed credit is counted
         credits = student.courses.forEach(course => {
             studentTotalCredits += course.passedCredits
         })
-    
-
-        createDivWithStudent(student.firstName, student.lastName, studentTotalCredits)
+        createDivWithStudent(student.firstName, student.lastName, studentTotalCredits, hej)
     }
 }
+
+
+
 
 
 function setEventListener (){
@@ -49,6 +61,48 @@ function setEventListener (){
 }
 
 setEventListener()
+
+
+
+function getCoursesById (courses){
+    return courses.map(studentCourse =>{
+        return DATABASE.courses.find(course =>{
+            return course.courseId == studentCourse.courseId
+        })
+    })
+}
+
+
+function createDivWithCourseInfo(title, startdate, passedcredits, totalcredits){
+
+    let div = document.createElement("div")
+    div.innerHTML = `
+    <p> ${title}</p>
+    <p> ${startdate} ( ${passedcredits} / ${totalcredits}</p>
+    `
+}
+
+
+// function setDivWithCourseInfo (lastname){
+//     let students = filterByLastName(lastname)
+
+//     for (let student of students){
+//         studentCourses = getCoursesById(student.courses)
+//         console.log(studentCourses)
+
+//         let hej = studentCourses.map(course =>{
+//             return course.title
+//         })
+
+//         hej.forEach(cours =>{
+//             createDivWithCourseInfo(cours, cours , cours, cours)
+//         })
+
+//         console.log(hej)
+
+    
+//     }
+// }
 
 
 
