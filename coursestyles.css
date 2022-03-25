@@ -26,6 +26,11 @@ body{
     margin-bottom: 6px;
 }
 
+.teacher-wrapper{
+    display: flex;
+    justify-content: space-around;
+}
+
 .student-result{
     display: grid;
     grid-template-columns: repeat(4,1fr);

@@ -31,18 +31,39 @@ function setCourseHTML (){
         let courseDiv = cretaDiv(course.title, course.totalCredits)
         wrapper.appendChild(courseDiv)
         
+        let teacherWrapper = createTeacherWrapper()
+        courseDiv.appendChild(teacherWrapper)
+
         // får fram diven med ansvarig lärare
         let courseResponsible = getResponsiblieTeacher(course.courseResponsible)
         let responsibleTeacherDiv = createHtmlForResponsibleTeacher(courseResponsible)
-        courseDiv.appendChild(responsibleTeacherDiv)
+        teacherWrapper.appendChild(responsibleTeacherDiv)
+
+
+        // får fram div med lärare och och rubrik
+        let teachersContainer = document.createElement("div")
+        teachersContainer.innerHTML= "<h3>Teachers</h3>"
+        
+        let teachers = getCourseTeachers(course.teachers)
+        let teachersDivs = createHtmlForTeachers(teachers)
+        teacherWrapper.appendChild(teachersContainer)
+        
+        teachersContainer.appendChild(teachersDivs)
+
+
+
 
         // får fram divarna med studenterna
+        let studentsDivsContainer = document.createElement("div")
+        studentsDivsContainer.innerHTML = "<h3> Students: </h3>" 
+        courseDiv.appendChild(studentsDivsContainer)
+
         let students = getStudents(course.courseId)
         let studentDiv = createHtmlWithStudentInfo(students)
-        courseDiv.appendChild(studentDiv)
+        studentsDivsContainer.appendChild(studentDiv)
 
 
-        
+
     }
 }
 
@@ -112,7 +133,7 @@ function getResponsiblieTeacher(courseResponsible){
 function createHtmlForResponsibleTeacher (teacher){
     let teacherDiv = document.createElement("div")
     teacherDiv.innerHTML = 
-    `<h3>Teachers:</h3>
+    `<h3>Courseresponsible:</h3>
     <p>${teacher.firstName + " " + teacher.lastName}</p>`
 
     return teacherDiv
@@ -120,3 +141,35 @@ function createHtmlForResponsibleTeacher (teacher){
 
 
 
+function getCourseTeachers (courseTeaachers){
+
+    return courseTeaachers.map(teacherid =>{
+        return DATABASE.teachers.find(teacher=>{
+            return teacher.teacherId == teacherid
+        })
+    })
+
+}
+
+
+function createHtmlForTeachers (teachers){
+    let allTeachersDiv = document.createElement("div")
+
+    for (let teacher of teachers){
+        let teacherDiv = document.createElement("div")
+
+        teacherDiv.innerHTML = `
+        <p>${teacher.firstName} ${teacher.lastName} ( ${teacher.post})`
+
+        allTeachersDiv.appendChild(teacherDiv)
+    }
+    return allTeachersDiv
+}
+
+
+function createTeacherWrapper(){
+    let teacherWrapper = document.createElement("div")
+    teacherWrapper.classList.add("teacher-wrapper")
+
+    return teacherWrapper
+}
