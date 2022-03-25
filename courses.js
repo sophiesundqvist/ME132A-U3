@@ -11,11 +11,12 @@ function cretaDiv (title, credits){
     let courseDiv = document.createElement("div")
     courseDiv.classList.add("box")
     courseDiv.innerHTML = `
-    <h3>${title} (Credits ${credits})</h3>
-    <h4>Students</h4>`
+    <h3>${title} (Credits ${credits})</h3>`
 
     return courseDiv
 }
+
+
 
 function setCourseHTML (){
     let courseTitle = document.getElementById("search").value
@@ -26,15 +27,20 @@ function setCourseHTML (){
     // tömmer wrapper på divar innan loopen körs
     wrapper.innerHTML=""
     for (let course of courses){
+        // får fram diven med kursen
         let courseDiv = cretaDiv(course.title, course.totalCredits)
         wrapper.appendChild(courseDiv)
         
-        
+        // får fram diven med ansvarig lärare
+        let courseResponsible = getResponsiblieTeacher(course.courseResponsible)
+        let responsibleTeacherDiv = createHtmlForResponsibleTeacher(courseResponsible)
+        courseDiv.appendChild(responsibleTeacherDiv)
+
+        // får fram divarna med studenterna
         let students = getStudents(course.courseId)
         let studentDiv = createHtmlWithStudentInfo(students)
         courseDiv.appendChild(studentDiv)
 
-        console.log(getResponsiblieTeacher(course.courseResponsible))
 
         
     }
@@ -58,7 +64,7 @@ function getStudents(courseId){
         for (let studentcourse of student.courses){
             if (studentcourse.courseId == courseId){
                 let studentInfoPerCourse = {
-                    name: student.firstName + student.lastName,
+                    name: student.firstName + " " + student.lastName,
                     passedCredits: studentcourse.passedCredits,
                     startedTermin: studentcourse.started.semester,
                     startedYear: studentcourse.started.year
@@ -100,5 +106,17 @@ function getResponsiblieTeacher(courseResponsible){
         return teacher.teacherId === courseResponsible
     })
 }
+
+
+
+function createHtmlForResponsibleTeacher (teacher){
+    let teacherDiv = document.createElement("div")
+    teacherDiv.innerHTML = 
+    `<h3>Teachers:</h3>
+    <p>${teacher.firstName + " " + teacher.lastName}</p>`
+
+    return teacherDiv
+}
+
 
 
