@@ -94,13 +94,13 @@ function creatCourseDivs(courses){
 // går igenom kursena baserat på paramatern och mappar om beroende på =>
 // går vidare och med hjälp av find så hittar den en kurs 
 // går vidare och retunera den kurs som har har det kursid som stämmer överens med studentens kurs id  
-function getCoursesById (courses){
-    return courses.map(studentCourse =>{
-        return DATABASE.courses.find(course =>{
-            return course.courseId == studentCourse.courseId
-        })
-    })
-}
+// function getCoursesById (courses){
+//     return courses.map(studentCourse =>{
+//         return DATABASE.courses.find(course =>{
+//             return course.courseId == studentCourse.courseId
+//         })
+//     })
+// }
 
 
 function getCourseTitle (course){

@@ -22,11 +22,18 @@ function setCourseHTML (){
     let courses = filterCoursesByTitle(courseTitle)
     let wrapper = document.getElementById("result")
 
+    
     // tömmer wrapper på divar innan loopen körs
     wrapper.innerHTML=""
     for (let course of courses){
         let courseDiv = cretaDiv(course.title, course.totalCredits)
         wrapper.appendChild(courseDiv)
+
+        
+        let students = getStudents(course.courseId)
+        let studentDiv = createHtmlWithStudentInfo(students)
+        courseDiv.appendChild(studentDiv)
+        
     }
 }
 
@@ -40,22 +47,47 @@ function setEventListener (){
 setEventListener()
 
 
-// går igenom kurserna som är filtrerade
-// returnerar en array genom map som =>
-// går sedan igenom DATABASE.students och filtrerar ut dvs returnera en array med de studenter =>
-// som stämmer överens med student.courses.find =>
-// som sedan stämmer överens med och har samma kurs id som titelns kursid
-// 
-// functionen returnera en array med så många "celler" som det finns kurser =>
-//  i de cellerna är det en array med så många studenter som gått kurserna
-function getStudentByCourseID (coursetitle){
-    let courses = filterCoursesByTitle(coursetitle) 
-
-    return courses.map(course => {
-        return DATABASE.students.filter(student=>{
-            return student.courses.find(studentCourse=>{
-                return studentCourse.courseId == course.courseId
-            })
-        })
-    })
+// fåt fram array med studenter som gått kurs med samma kursID
+function getStudents(courseId){
+    let students = []
+    
+    for (let student of DATABASE.students){
+        for (let studentcourse of student.courses){
+            if (studentcourse.courseId == courseId){
+                let studentInfoPerCourse = {
+                    name: student.firstName + student.lastName,
+                    passedCredits: studentcourse.passedCredits,
+                    startedTermin: studentcourse.started.semester,
+                    startedYear: studentcourse.started.year
+                    }
+                students.push(studentInfoPerCourse)
+            }
+        }
+    }
+    return students
 }
+
+
+
+
+
+// skapa html med studentinfon
+
+function createHtmlWithStudentInfo (students){
+
+    let studentDivContainer = document.createElement("div")
+    studentDivContainer.classList.add("student-result")
+
+    for (let student of students){
+        let studentDiv = document.createElement("div")
+
+        studentDiv.innerHTML = `
+        <p> ${student.name} (${student.passedCredits} Credits)</p>
+        <p> ${student.startedTermin + student.startedYear}</p>`
+
+        studentDivContainer.appendChild(studentDiv)
+    }
+
+    return studentDivContainer
+}
+
