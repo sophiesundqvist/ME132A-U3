@@ -21,18 +21,21 @@ function setCourseHTML (){
     let courseTitle = document.getElementById("search").value
     let courses = filterCoursesByTitle(courseTitle)
     let wrapper = document.getElementById("result")
-
+    
     
     // tömmer wrapper på divar innan loopen körs
     wrapper.innerHTML=""
     for (let course of courses){
         let courseDiv = cretaDiv(course.title, course.totalCredits)
         wrapper.appendChild(courseDiv)
-
+        
         
         let students = getStudents(course.courseId)
         let studentDiv = createHtmlWithStudentInfo(students)
         courseDiv.appendChild(studentDiv)
+
+        console.log(getResponsiblieTeacher(course.courseResponsible))
+
         
     }
 }
@@ -69,8 +72,6 @@ function getStudents(courseId){
 
 
 
-
-
 // skapa html med studentinfon
 
 function createHtmlWithStudentInfo (students){
@@ -83,11 +84,21 @@ function createHtmlWithStudentInfo (students){
 
         studentDiv.innerHTML = `
         <p> ${student.name} (${student.passedCredits} Credits)</p>
-        <p> ${student.startedTermin + student.startedYear}</p>`
+        <p> ${student.startedTermin + " " + student.startedYear}</p>`
 
         studentDivContainer.appendChild(studentDiv)
     }
 
     return studentDivContainer
 }
+
+
+
+// find teacher responsblie for course based on course id
+function getResponsiblieTeacher(courseResponsible){
+    return DATABASE.teachers.find(teacher=>{
+        return teacher.teacherId === courseResponsible
+    })
+}
+
 
