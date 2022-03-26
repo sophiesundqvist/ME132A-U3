@@ -1,7 +1,8 @@
 body{
     margin: 20px;
     height: 100vh;
-    background-color: rgb(217, 212, 207);
+    background-image: url(bilder/brandi-redd-aJTiW00qqtI-unsplash.jpg);
+    background-size: cover;
     font-family: 'Times New Roman', Times, serif;
 }
 
@@ -9,13 +10,23 @@ h1{
     text-align: center;
     margin-bottom: 30px;
     font-family: 'Playfair Display', serif;
+    margin-left: 400px;
+    margin-right: 400px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 10px;
 }
 
 #search-box{
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     display: flex;
+    margin-right: 200px;
+    margin-left: 200px;
+    padding-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    font-weight: bold;
 }
 
 #search-box > p{
@@ -24,7 +35,7 @@ h1{
 
 
 .box{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     margin: 20px;
     border-radius: 10px;
@@ -40,7 +51,7 @@ h1{
 
 .teacher-wrapper > div > p{
     padding: 12px;
-    background-color: rgb(240, 193, 170);
+    background-color: rgba(255, 193, 162, 0.9);
     width: 200px;
     display: flex;
     justify-content: center;
@@ -87,7 +98,7 @@ h1{
 }
 
 .student-result > .passed{
-    background-color: rgb(184,225,200)
+    background-color:rgba(173, 255, 173, 0.9)
 }
 
 

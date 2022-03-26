@@ -1,26 +1,40 @@
 body{
     margin: 20px;
     height: 100vh;
-    background-color: rgb(217, 212, 207);
+    background-image: url(bilder/brandi-redd-aJTiW00qqtI-unsplash.jpg);
+    background-size: cover;
 }
 
 h1{
     text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Playfair Display', serif;
+    margin-left: 400px;
+    margin-right: 400px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 10px;
 }
 
 #search-box{
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 200px;
+    margin-left: 200px;
+    padding-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    font-weight: bold;
 }
 
 #search-box > p{
-    margin: 0;
-    margin-right: 10px;
-    margin-left: 20px;
+    margin-bottom: 5px;
 }
 
 
 .box{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     margin: 20px;
     border-radius: 10px;
@@ -40,15 +54,15 @@ h1{
 .course-result > div{
     padding-left: 10px;
     border-radius: 10px;
-    background-color: rgb(179, 198, 219);;
+    background-color: rgba(191, 184, 175, 0.4);;
     border: 0.5px solid black;
     font-size: 10pt;
-    padding-bottom: 8px;
-    padding-top: 8px;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .course-result > .passed{
-    background-color: rgb(161, 243, 161);
+    background-color: rgba(173, 255, 173, 0.9);
 }
 
 
