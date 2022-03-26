@@ -37,13 +37,23 @@ function setHTML (){
     let students = filterByLastName(lastname)
     let wrapper = document.getElementById("result")
 
+    // sorterar studenter efter efternamn
+    students.sort(function(a,b){
+        if (a.lastName > b.lastName){
+            return 1
+        }
+        if (a.lastName < b.lastName){
+            return -1
+        }
+            return 0
+    }) 
+
     wrapper.innerHTML = ""
     for (let student of students){
 
         let totalCredit = getTotalCredits(student.courses)
         let studentDiv = cretaDiv(student.firstName, student.lastName, totalCredit)
         wrapper.appendChild(studentDiv)
-
 
         let divWithCourses = creatCourseDivs(student.courses)
         studentDiv.appendChild(divWithCourses)
@@ -69,9 +79,10 @@ setEventListener()
 function creatCourseDivs(courses){
     let courseContainer = document.createElement("div")
     courseContainer.classList.add("course-result")
-    
    
+
     for (let course of courses){
+
 
         let courseTitle = getCourseTitle(course)
         let courseTotalCredit = getCourseTotalCredit(course)

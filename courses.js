@@ -68,6 +68,7 @@ function setCourseHTML (){
         courseDiv.appendChild(studentsDivsContainer)
 
         let students = getStudents(course.courseId)
+
         let studentDiv = createHtmlWithStudentInfo(students, course.totalCredits)
         studentsDivsContainer.appendChild(studentDiv)
 
@@ -87,7 +88,18 @@ setEventListener()
 // fåt fram array med studenter som gått kurs med samma kursID
 function getStudents(courseId){
     let students = []
-    
+
+    // gör så studenterna sorteras efter efternamn
+    DATABASE.students.sort(function(a,b){
+        if (a.lastName > b.lastName){
+            return 1
+        }
+        if (a.lastName < b.lastName){
+            return -1
+        }
+            return 0
+    })  
+
     for (let student of DATABASE.students){
         for (let studentcourse of student.courses){
             if (studentcourse.courseId == courseId){
@@ -101,6 +113,7 @@ function getStudents(courseId){
             }
         }
     }
+
     return students
 }
 

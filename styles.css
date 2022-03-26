@@ -4,6 +4,10 @@ body{
     background-color: rgb(217, 212, 207);
 }
 
+h1{
+    text-align: center;
+}
+
 #search-box{
     display: flex;
 }
