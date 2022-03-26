@@ -31,6 +31,15 @@ body{
     justify-content: space-around;
 }
 
+.teacher-wrapper > div:nth-child(2) > div{
+    display: flex;
+}
+
+.teacher-wrapper > div:nth-child(2) > div > div{
+    padding-right: 10px;
+    margin-top: 0px;
+}
+
 .student-result{
     display: grid;
     grid-template-columns: repeat(4,1fr);

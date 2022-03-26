@@ -40,7 +40,7 @@ function setCourseHTML (){
         teacherWrapper.appendChild(responsibleTeacherDiv)
 
 
-        // får fram div med lärare och och rubrik
+        // får fram div med lärare och och rubrik skapa exrea div för att kunna styla bättre i css
         let teachersContainer = document.createElement("div")
         teachersContainer.innerHTML= "<h3>Teachers</h3>"
         
@@ -59,7 +59,7 @@ function setCourseHTML (){
         courseDiv.appendChild(studentsDivsContainer)
 
         let students = getStudents(course.courseId)
-        let studentDiv = createHtmlWithStudentInfo(students)
+        let studentDiv = createHtmlWithStudentInfo(students, course.totalCredits)
         studentsDivsContainer.appendChild(studentDiv)
 
 
@@ -101,7 +101,7 @@ function getStudents(courseId){
 
 // skapa html med studentinfon
 
-function createHtmlWithStudentInfo (students){
+function createHtmlWithStudentInfo (students , coursecredits){
 
     let studentDivContainer = document.createElement("div")
     studentDivContainer.classList.add("student-result")
@@ -114,6 +114,10 @@ function createHtmlWithStudentInfo (students){
         <p> ${student.startedTermin + " " + student.startedYear}</p>`
 
         studentDivContainer.appendChild(studentDiv)
+
+        if (student.passedCredits == coursecredits){
+            studentDiv.classList.add("passed")
+        }
     }
 
     return studentDivContainer
@@ -173,3 +177,5 @@ function createTeacherWrapper(){
 
     return teacherWrapper
 }
+
+
