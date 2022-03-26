@@ -11,7 +11,7 @@ function cretaDiv (title, credits){
     let courseDiv = document.createElement("div")
     courseDiv.classList.add("box")
     courseDiv.innerHTML = `
-    <h3>${title} (Credits ${credits})</h3>`
+    <h3>${title} ( ${credits} Credits )</h3>`
 
     return courseDiv
 }
@@ -19,10 +19,21 @@ function cretaDiv (title, credits){
 
 
 function setCourseHTML (){
-    let courseTitle = document.getElementById("search").value
+    let courseTitle = document.getElementById("search").value.toLowerCase()
     let courses = filterCoursesByTitle(courseTitle)
     let wrapper = document.getElementById("result")
     
+    // sorterar den filtrerade arrayen i bokastavsordning
+    courses.sort(function(a,b){
+        if (a.title > b.title){
+            return 1
+        }
+        if (a.title < b.title){
+            return -1
+        }
+            return 0
+    })  
+
     
     // tömmer wrapper på divar innan loopen körs
     wrapper.innerHTML=""
@@ -42,15 +53,13 @@ function setCourseHTML (){
 
         // får fram div med lärare och och rubrik skapa exrea div för att kunna styla bättre i css
         let teachersContainer = document.createElement("div")
-        teachersContainer.innerHTML= "<h3>Teachers</h3>"
+        teachersContainer.innerHTML= "<h3>Teachers:</h3>"
         
         let teachers = getCourseTeachers(course.teachers)
         let teachersDivs = createHtmlForTeachers(teachers)
         teacherWrapper.appendChild(teachersContainer)
         
         teachersContainer.appendChild(teachersDivs)
-
-
 
 
         // får fram divarna med studenterna
@@ -61,8 +70,6 @@ function setCourseHTML (){
         let students = getStudents(course.courseId)
         let studentDiv = createHtmlWithStudentInfo(students, course.totalCredits)
         studentsDivsContainer.appendChild(studentDiv)
-
-
 
     }
 }
@@ -138,7 +145,7 @@ function createHtmlForResponsibleTeacher (teacher){
     let teacherDiv = document.createElement("div")
     teacherDiv.innerHTML = 
     `<h3>Courseresponsible:</h3>
-    <p>${teacher.firstName + " " + teacher.lastName}</p>`
+    <p>${teacher.firstName + " " + teacher.lastName} (${teacher.post})</p>`
 
     return teacherDiv
 }
@@ -177,5 +184,3 @@ function createTeacherWrapper(){
 
     return teacherWrapper
 }
-
-
