@@ -42,8 +42,16 @@ function setCourseHTML (){
         let courseDiv = cretaDiv(course.title, course.totalCredits)
         wrapper.appendChild(courseDiv)
         
+        let button = createButton()
+        courseDiv.appendChild(button)
+
+        let buttonHide = hideInfoButton()
+        courseDiv.appendChild(buttonHide)
+        buttonHide.classList.add("hidden")
+
         let teacherWrapper = createTeacherWrapper()
         courseDiv.appendChild(teacherWrapper)
+        teacherWrapper.classList.add("hidden")
 
         // får fram diven med ansvarig lärare
         let courseResponsible = getResponsiblieTeacher(course.courseResponsible)
@@ -53,7 +61,7 @@ function setCourseHTML (){
 
         // får fram div med lärare och och rubrik skapa exrea div för att kunna styla bättre i css
         let teachersContainer = document.createElement("div")
-        teachersContainer.innerHTML= "<h3>Teachers:</h3>"
+        teachersContainer.innerHTML= `<h3>Teachers:</h3>`
         
         let teachers = getCourseTeachers(course.teachers)
         let teachersDivs = createHtmlForTeachers(teachers)
@@ -62,15 +70,35 @@ function setCourseHTML (){
         teachersContainer.appendChild(teachersDivs)
 
 
+
+
         // får fram divarna med studenterna
         let studentsDivsContainer = document.createElement("div")
+        studentsDivsContainer.classList.add("hidden")
         studentsDivsContainer.innerHTML = "<h3> Students: </h3>" 
         courseDiv.appendChild(studentsDivsContainer)
+
 
         let students = getStudents(course.courseId)
 
         let studentDiv = createHtmlWithStudentInfo(students, course.totalCredits)
         studentsDivsContainer.appendChild(studentDiv)
+
+
+        button.addEventListener("click", function(){
+            studentsDivsContainer.classList.toggle("hidden")
+            teacherWrapper.classList.toggle("hidden")
+            buttonHide.classList.toggle("hidden")
+            button.classList.add("hidden")
+
+        })
+
+        buttonHide.addEventListener("click", function(){
+            studentsDivsContainer.classList.toggle("hidden")
+            teacherWrapper.classList.toggle("hidden")
+            buttonHide.classList.toggle("hidden")
+            button.classList.toggle("hidden")
+        })
 
     }
 }
@@ -197,3 +225,58 @@ function createTeacherWrapper(){
 
     return teacherWrapper
 }
+
+
+function changeTheme(){
+    let selector = document.getElementById("select")
+    localStorage.setItem("theme", selector.value)
+
+    let body = document.querySelector("body")
+
+    if (selector.value == "dark"){
+        body.className = "dark"
+    } else {
+        body.className = ""
+    }
+}
+
+function setTheme(){
+    let theme = localStorage.getItem("theme")
+    let body = document.querySelector("body")
+
+    if (theme == "dark"){
+        body.className = "dark"
+    } else {
+        body.className = ""
+    }
+}
+
+setTheme()
+
+function addEventListenerToSelector(){
+    let selector = document.getElementById("select")
+
+    selector.addEventListener("change", changeTheme)
+
+}
+
+addEventListenerToSelector()
+
+
+
+function createButton(){
+    let button = document.createElement("button")
+    button.innerHTML = ` Click to show more info`
+
+    return button
+}
+
+
+function hideInfoButton (){
+    let button = document.createElement("button")
+    button.innerHTML = "Hide info"
+
+    return button
+}
+
+

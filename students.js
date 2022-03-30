@@ -11,8 +11,8 @@ function cretaDiv (firstname, lastname, credits){
         let studentDiv = document.createElement("div")
         studentDiv.classList.add("box")
         studentDiv.innerHTML = `
-        <h3>${firstname} ${lastname} (Credits ${credits})</h3>
-        <h4>Coruses</h4>`
+        <h2>${firstname} ${lastname} (Credits ${credits})</h2>
+        <h3> Courses </h3>`
 
     return studentDiv
 }
@@ -33,7 +33,7 @@ function getTotalCredits(courses){
 
 
 function setHTML (){
-    let lastname = document.getElementById("search").value
+    let lastname = document.getElementById("search").value.toLowerCase()
     let students = filterByLastName(lastname)
     let wrapper = document.getElementById("result")
 
@@ -55,15 +55,21 @@ function setHTML (){
         let studentDiv = cretaDiv(student.firstName, student.lastName, totalCredit)
         wrapper.appendChild(studentDiv)
 
+         
+        
         let divWithCourses = creatCourseDivs(student.courses)
         studentDiv.appendChild(divWithCourses)
 
+        studentDiv.addEventListener("click", function(){
+            divWithCourses.classList.toggle("course-result")
+        })
 
     }
 
 }
 
-
+// ge studentdiv ett klickevent
+// när man klickar så ska man kalla på en fun
 
 function setEventListener (){
     let form = document.getElementById("search-box")
@@ -78,7 +84,7 @@ setEventListener()
 // behöver blir kallad students[i].courses
 function creatCourseDivs(courses){
     let courseContainer = document.createElement("div")
-    courseContainer.classList.add("course-result")
+    courseContainer.classList.add("hidden-course-result")
    
 
     for (let course of courses){
@@ -130,3 +136,39 @@ function changeBackgroundColorPassedCredit (course, courseTotalCredit, studentPa
     }
 
 }
+
+
+function changeTheme(){
+    let selector = document.getElementById("select")
+    localStorage.setItem("theme", selector.value)
+
+    let body = document.querySelector("body")
+
+    if (selector.value == "dark"){
+        body.className = "dark"
+    } else {
+        body.className = ""
+    }
+}
+
+function setTheme(){
+    let theme = localStorage.getItem("theme")
+    let body = document.querySelector("body")
+
+    if (theme == "dark"){
+        body.className = "dark"
+    } else {
+        body.className = ""
+    }
+}
+
+setTheme()
+
+function addEventListenerToSelector(){
+    let selector = document.getElementById("select")
+
+    selector.addEventListener("change", changeTheme)
+
+}
+
+addEventListenerToSelector()

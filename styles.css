@@ -1,31 +1,48 @@
 body{
     margin: 20px;
     height: 100vh;
-    background-image: url(bilder/brandi-redd-aJTiW00qqtI-unsplash.jpg);
+    background-image: url(bilder/vasily-koloda-8CqDvPuo_kI-unsplash.jpg);
     background-size: cover;
+    font-family: 'Times New Roman', Times, serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dark{
+    background-image: url(bilder/xin-wang-NHGkfa-rDPw-unsplash.jpg);
+    background-size: contain;
 }
 
 h1{
     text-align: center;
     margin-bottom: 30px;
     font-family: 'Playfair Display', serif;
-    margin-left: 400px;
-    margin-right: 400px;
+    width: 300px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     padding: 10px;
+}
+
+h3:hover{
+    color: rgb(149, 149, 255);
+    cursor: pointer;
 }
 
 #search-box{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 200px;
-    margin-left: 200px;
+    width: 500px;
     padding-bottom: 10px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     font-weight: bold;
+}
+
+#select{
+    position: absolute;
+    left: 30px;
 }
 
 #search-box > p{
@@ -38,12 +55,16 @@ h1{
     padding: 20px;
     margin: 20px;
     border-radius: 10px;
+    width: 80vw;
 }
 
-.box > h4{
+.box > h3{
     margin-bottom: 6px;
 }
 
+.hidden-course-result{
+    display: none;
+}
 
 .course-result{
     display: grid;
@@ -69,6 +90,5 @@ h1{
 .course-result > div > p{
     margin: 0;
 }
-
 
 

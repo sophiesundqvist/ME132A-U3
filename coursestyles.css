@@ -1,28 +1,42 @@
+
+.dark{
+    background-image: url(bilder/jonas-jacobsson-2xaF4TbjXT0-unsplash.jpg);
+    background-size: cover;
+}
+
+
 body{
     margin: 20px;
     height: 100vh;
     background-image: url(bilder/brandi-redd-aJTiW00qqtI-unsplash.jpg);
     background-size: cover;
     font-family: 'Times New Roman', Times, serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#select{
+    position: absolute;
+    left: 30px;
 }
 
 h1{
     text-align: center;
     margin-bottom: 30px;
     font-family: 'Playfair Display', serif;
-    margin-left: 400px;
-    margin-right: 400px;
+    width: 300px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     padding: 10px;
+
 }
 
 #search-box{
     flex-direction: column;
     align-items: center;
     display: flex;
-    margin-right: 200px;
-    margin-left: 200px;
+    width: 500px;
     padding-bottom: 10px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
@@ -37,6 +51,7 @@ h1{
 .box{
     background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
+    width: 80vw;
     margin: 20px;
     border-radius: 10px;
 }
@@ -81,10 +96,22 @@ h1{
     margin: 0px;
 }
 
+.hidden{
+    display: none;
+}
+
+/* .visible{
+    display: block;
+} */
+
 .student-result{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     gap: 5px;
+}
+
+.hidden{
+    display: none;
 }
 
 .student-result > div{
@@ -105,3 +132,10 @@ h1{
 .student-result > div > p{
     margin: 0;
 }
+
+button{
+    padding: 10px;
+}
+
+
+
