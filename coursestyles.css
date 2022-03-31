@@ -1,6 +1,6 @@
 
 .dark{
-    background-image: url(bilder/jonas-jacobsson-2xaF4TbjXT0-unsplash.jpg);
+    background-image: url(bilder/kelly-sikkema-tk9RQCq5eQo-unsplash.jpg);
     background-size: cover;
 }
 
@@ -100,10 +100,6 @@ h1{
     display: none;
 }
 
-/* .visible{
-    display: block;
-} */
-
 .student-result{
     display: grid;
     grid-template-columns: repeat(4,1fr);
@@ -134,7 +130,7 @@ h1{
 }
 
 button{
-    padding: 10px;
+    padding: 5px;
 }
 
 

@@ -1,7 +1,7 @@
 body{
     margin: 20px;
     height: 100vh;
-    background-image: url(bilder/vasily-koloda-8CqDvPuo_kI-unsplash.jpg);
+    background-image: url(bilder/brandi-redd-aJTiW00qqtI-unsplash.jpg);
     background-size: cover;
     font-family: 'Times New Roman', Times, serif;
     display: flex;
@@ -10,7 +10,7 @@ body{
 }
 
 .dark{
-    background-image: url(bilder/xin-wang-NHGkfa-rDPw-unsplash.jpg);
+    background-image: url(bilder/kelly-sikkema-tk9RQCq5eQo-unsplash.jpg);
     background-size: contain;
 }
 

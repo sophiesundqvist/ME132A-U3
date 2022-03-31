@@ -8,11 +8,11 @@ function filterByLastName(lastname){
 
 function cretaDiv (firstname, lastname, credits){
 
-        let studentDiv = document.createElement("div")
-        studentDiv.classList.add("box")
-        studentDiv.innerHTML = `
-        <h2>${firstname} ${lastname} (Credits ${credits})</h2>
-        <h3> Courses </h3>`
+    let studentDiv = document.createElement("div")
+    studentDiv.classList.add("box")
+    studentDiv.innerHTML = `
+    <h2>${firstname} ${lastname} (Credits ${credits})</h2>
+    <h3> Courses </h3>`
 
     return studentDiv
 }
@@ -23,9 +23,9 @@ function getTotalCredits(courses){
 
     let studentTotalCredits = 0
 
-        courses.forEach(course =>{
-            studentTotalCredits = studentTotalCredits + course.passedCredits
-        })
+    courses.forEach(course =>{
+        studentTotalCredits = studentTotalCredits + course.passedCredits
+    })
 
     return studentTotalCredits
 
@@ -55,18 +55,15 @@ function setHTML (){
         let studentDiv = cretaDiv(student.firstName, student.lastName, totalCredit)
         wrapper.appendChild(studentDiv)
 
-         
-        
         let divWithCourses = creatCourseDivs(student.courses)
         studentDiv.appendChild(divWithCourses)
 
         studentDiv.addEventListener("click", function(){
             divWithCourses.classList.toggle("course-result")
         })
-
     }
-
 }
+
 
 // ge studentdiv ett klickevent
 // när man klickar så ska man kalla på en fun
@@ -79,16 +76,13 @@ function setEventListener (){
 setEventListener()
 
 
-
 // skapar en div som  tillsammans innerhåller paragrafer med alla courses 
-// behöver blir kallad students[i].courses
+// behöver bli anropad i students[i].courses
 function creatCourseDivs(courses){
     let courseContainer = document.createElement("div")
     courseContainer.classList.add("hidden-course-result")
-   
 
     for (let course of courses){
-
 
         let courseTitle = getCourseTitle(course)
         let courseTotalCredit = getCourseTotalCredit(course)
@@ -97,11 +91,9 @@ function creatCourseDivs(courses){
         courseDiv.innerHTML = `
         <p> ${courseTitle} </p>
         <p> ${course.started.semester} ${course.started.year} (${course.passedCredits} of ${courseTotalCredit} credits)`
-
         courseContainer.appendChild(courseDiv)
 
         changeBackgroundColorPassedCredit(courseDiv, courseTotalCredit, course.passedCredits)
-
     }
 
     return courseContainer
@@ -114,8 +106,7 @@ function getCourseTitle (course){
         if (course.courseId == databasecourse.courseId){
             return databasecourse.title
         }
-    }
-    
+    }  
 }
 
 
@@ -126,7 +117,6 @@ function getCourseTotalCredit (course){
             return databasecourse.totalCredits
         }
     }
-    
 }
 
 function changeBackgroundColorPassedCredit (course, courseTotalCredit, studentPassedCredit){
@@ -134,7 +124,6 @@ function changeBackgroundColorPassedCredit (course, courseTotalCredit, studentPa
     if (courseTotalCredit == studentPassedCredit){
         course.classList.add("passed")
     }
-
 }
 
 
@@ -168,7 +157,6 @@ function addEventListenerToSelector(){
     let selector = document.getElementById("select")
 
     selector.addEventListener("change", changeTheme)
-
 }
 
 addEventListenerToSelector()

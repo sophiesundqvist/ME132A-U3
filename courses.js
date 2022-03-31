@@ -70,21 +70,18 @@ function setCourseHTML (){
         teachersContainer.appendChild(teachersDivs)
 
 
-
-
         // får fram divarna med studenterna
         let studentsDivsContainer = document.createElement("div")
         studentsDivsContainer.classList.add("hidden")
         studentsDivsContainer.innerHTML = "<h3> Students: </h3>" 
         courseDiv.appendChild(studentsDivsContainer)
 
-
         let students = getStudents(course.courseId)
 
         let studentDiv = createHtmlWithStudentInfo(students, course.totalCredits)
         studentsDivsContainer.appendChild(studentDiv)
 
-
+        // knappar för att visa och gömma info
         button.addEventListener("click", function(){
             studentsDivsContainer.classList.toggle("hidden")
             teacherWrapper.classList.toggle("hidden")
@@ -167,7 +164,6 @@ function createHtmlWithStudentInfo (students , coursecredits){
             studentDiv.classList.add("passed")
         }
     }
-
     return studentDivContainer
 }
 
@@ -200,7 +196,6 @@ function getCourseTeachers (courseTeaachers){
             return teacher.teacherId == teacherid
         })
     })
-
 }
 
 
@@ -240,6 +235,7 @@ function changeTheme(){
     }
 }
 
+
 function setTheme(){
     let theme = localStorage.getItem("theme")
     let body = document.querySelector("body")
@@ -253,20 +249,19 @@ function setTheme(){
 
 setTheme()
 
+
 function addEventListenerToSelector(){
     let selector = document.getElementById("select")
 
     selector.addEventListener("change", changeTheme)
-
 }
 
 addEventListenerToSelector()
 
 
-
 function createButton(){
     let button = document.createElement("button")
-    button.innerHTML = ` Click to show more info`
+    button.innerHTML = ` Click to view more info`
 
     return button
 }
@@ -274,7 +269,7 @@ function createButton(){
 
 function hideInfoButton (){
     let button = document.createElement("button")
-    button.innerHTML = "Hide info"
+    button.innerHTML = "Hide info ^"
 
     return button
 }

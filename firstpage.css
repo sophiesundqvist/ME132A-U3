@@ -1,0 +1,79 @@
+body{
+    height: 100vh;
+    background-color: rgb(228, 219, 208);
+}
+
+h1{
+    margin-top: 50px;
+    text-align: center;
+    color: black;
+}
+
+body > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+body > div > h3{
+    color: black;
+    margin-bottom: 40px;
+}
+
+body > div > div {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+}
+
+body > div > div > p {
+   margin-left: 30px;
+   margin-right: 30px;
+   font-size: 22pt;
+}
+
+
+#students{
+    font-size: 22pt;
+    padding: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-image: url(bilder/pang-yuhao-_kd5cxwZOK4-unsplash-2.jpg);
+    background-size: cover;
+    border-radius: 10px;
+}
+
+#courses{
+    border-radius: 10px;
+    font-size: 22pt;
+    padding: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-image: url(bilder/john-schnobrich-2FPjlAyMQTA-unsplash.jpg);
+    background-size: cover;
+}
+
+a{
+    text-decoration: none;
+    color: transparent;
+}
+
+#students:hover > a > div{
+    background-color: rgba(0, 0, 0, 0.568);
+    color: white;
+}
+
+#courses:hover > a > div{
+    background-color: rgba(0, 0, 0, 0.507);
+    color: white;
+}
+
+.box{
+    padding: 80px;
+    padding-left: 100px;
+    padding-right: 100px;
+    transition: 1s;
+    border-radius: 10px;
+}
